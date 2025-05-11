@@ -8,7 +8,7 @@ ENV OP_NODE_VERSION=v1.6.2
 # Clone optimism repo and build op-node
 RUN git clone https://github.com/ethereum-optimism/optimism.git /opt/optimism && \
     cd /opt/optimism/op-node && \
-    git checkout v1.6.2 && \
+    git checkout c8a638191 && \
     make op-node && \
     mv ./bin/op-node /usr/local/bin/op-node
 
