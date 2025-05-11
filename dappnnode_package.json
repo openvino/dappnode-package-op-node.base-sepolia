@@ -1,0 +1,10 @@
+{
+  "name": "op-node.base-sepolia.dnp.dappnode.eth",
+  "version": "0.1.0",
+  "description": "Base Sepolia op-node for rollup sync",
+  "image": "opnode.base-sepolia.dnp.dappnode.eth",
+  "type": "service",
+  "author": "Mike Tango Bravo",
+  "license": "MIT"
+}
+
