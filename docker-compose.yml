@@ -9,6 +9,7 @@ services:
       - "9545:9545"
       - "9003:9003"
     volumes:
+      - ./rollup.json:/data/rollup.json
       - opnode_data:/data
     environment:
       - OP_NODE_L1_RPC=${OP_NODE_L1_RPC}
@@ -37,4 +38,8 @@ services:
 
 volumes:
   opnode_data:
+networks:
+  default:
+    external:
+      name: base-sepolia-test
 
