@@ -11,7 +11,7 @@ RUN git clone https://github.com/ethereum-optimism/optimism.git /opt/optimism &&
     go build -o /usr/local/bin/op-node ./cmd/op-node
 
 # Add entrypoint script
-COPY entrypoint /entrypoint.sh
+COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
