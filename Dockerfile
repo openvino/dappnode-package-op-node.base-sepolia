@@ -4,9 +4,9 @@ FROM golang:1.22
 RUN apt-get update && apt-get install -y build-essential git curl
 
 # Clone the optimism monorepo and build op-node from a pinned commit
-# Clone optimism monorepo and checkout a valid commit
 RUN git clone https://github.com/ethereum-optimism/optimism.git /opt/optimism && \
     cd /opt/optimism && \
+    git fetch --all && \
     git checkout b43f79c71d3dd715d8a8ac0e22ebf989adbf753b && \
     cd op-node && \
     go build -o /usr/local/bin/op-node ./cmd/op-node
