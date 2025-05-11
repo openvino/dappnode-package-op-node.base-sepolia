@@ -1,16 +1,13 @@
 FROM golang:1.22
 
-# Install required tools
-RUN apt-get update && apt-get install -y build-essential git curl make
+RUN apt-get update && apt-get install -y build-essential git curl
 
-ENV OP_NODE_VERSION=v1.6.2
-
-# Clone optimism repo and build op-node
+# Clone and build op-node at pinned commit
 RUN git clone https://github.com/ethereum-optimism/optimism.git /opt/optimism && \
-    cd /opt/optimism/op-node && \
+    cd /opt/optimism && \
     git checkout c8a638191 && \
-    make op-node && \
-    mv ./bin/op-node /usr/local/bin/op-node
+    cd op-node && \
+    go build -o /usr/local/bin/op-node ./cmd/op-node
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
