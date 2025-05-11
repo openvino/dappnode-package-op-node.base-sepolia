@@ -11,9 +11,10 @@ services:
     volumes:
       - opnode_data:/data
     environment:
-      - OP_NODE_L1_RPC=https://sepolia.infura.io/v3/YOUR_KEY
-      - OP_NODE_L2_RPC=http://geth:8545
-      - OP_NODE_ROLLUP_CONFIG=/data/rollup.json
+      - OP_NODE_L1_RPC=${OP_NODE_L1_RPC}
+      - OP_NODE_L2_RPC=${OP_NODE_L2_RPC}
+      - OP_NODE_ROLLUP_CONFIG=${OP_NODE_ROLLUP_CONFIG}
+
     command:
       [
         "op-node",
