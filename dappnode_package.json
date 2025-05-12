@@ -1,0 +1,11 @@
+{
+  "name": "op-node.base-sepolia.dnp.dappnode.eth",
+  "version": "0.1.0",
+  "description": "Base Sepolia op-node client using official Optimism Docker image.",
+  "image": "ethereumoptimism/op-node:v1.3.0",
+  "type": "docker",
+  "author": "OpenVino",
+  "network": "main",
+  "license": "MIT"
+}
+

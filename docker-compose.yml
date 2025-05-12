@@ -1,4 +1,5 @@
 version: '3.8'
+
 services:
   op-node:
     build: .
@@ -6,38 +7,41 @@ services:
     container_name: op-node.base-sepolia
     restart: always
     ports:
-      - "9545:9545"
-      - "9003:9003"
+      - "9545:9545"     # L2 RPC
+      - "9003:9003"     # Prometheus metrics
     volumes:
       - ./rollup.json:/data/rollup.json
       - opnode_data:/data
+      - docker-base-sepolia_jwt_shared:/jwt:ro
     environment:
-      - OP_NODE_L1_RPC=${OP_NODE_L1_RPC}
-      - OP_NODE_L2_RPC=${OP_NODE_L2_RPC}
-      - OP_NODE_ROLLUP_CONFIG=${OP_NODE_ROLLUP_CONFIG}
-
+      - OP_NODE_L1_RPC=http://reth:8545
+      - OP_NODE_L2_RPC=http://localhost:9545
+      - OP_NODE_L1_BEACON=http://prysm:3500
+      - OP_NODE_L1_AUTH=http://reth:8551
+      - OP_NODE_JWT_SECRET=/jwt/jwt.hex
+      - OP_NODE_ROLLUP_CONFIG=/data/rollup.json
     command:
       [
         "op-node",
-        "--l1",
-        "$OP_NODE_L1_RPC",
-        "--l2",
-        "$OP_NODE_L2_RPC",
-        "--rollup.config",
-        "$OP_NODE_ROLLUP_CONFIG",
-        "--rpc.addr",
-        "0.0.0.0",
-        "--rpc.port",
-        "9545",
+        "--l1", "$OP_NODE_L1_RPC",
+        "--l2", "$OP_NODE_L2_RPC",
+        "--l1.beacon", "$OP_NODE_L1_BEACON",
+        "--l1.auth", "$OP_NODE_L1_AUTH",
+        "--l1.jwt-secret", "$OP_NODE_JWT_SECRET",
+        "--rollup.config", "$OP_NODE_ROLLUP_CONFIG",
+        "--rpc.addr", "0.0.0.0",
+        "--rpc.port", "9545",
         "--metrics.enabled",
-        "--metrics.addr",
-        "0.0.0.0",
-        "--metrics.port",
-        "9003"
+        "--metrics.addr", "0.0.0.0",
+        "--metrics.port", "9003",
+        "--p2p.disable",
+        "--network", "base-sepolia"
       ]
 
 volumes:
   opnode_data:
+  docker-base-sepolia_jwt_shared:
+
 networks:
   default:
     external:
