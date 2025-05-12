@@ -3,7 +3,7 @@ version: '3.8'
 services:
   op-node:
     build: .
-    image: opnode.base-sepolia.dnp.dappnode.eth
+    image: ghcr.io/openvino/op-node.base-sepolia:latest
     container_name: op-node.base-sepolia
     restart: always
     ports:
