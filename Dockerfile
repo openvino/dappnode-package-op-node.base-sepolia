@@ -16,7 +16,7 @@ RUN apt-get update && \
     curl -sSL https://just.systems/install.sh | bash -s -- --to /usr/local/bin
 
 WORKDIR /src
-RUN git clone https://github.com/ethereum-optimism/optimism.git
+RUN git clone --depth=1 --branch op-node/v1.13.2 https://github.com/ethereum-optimism/optimism.git
 WORKDIR /src/optimism/op-node
 
 # Checkout a working tag that matches source + go.mod requirement
