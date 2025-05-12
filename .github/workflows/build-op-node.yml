@@ -1,32 +1,29 @@
-name: Build and Push to GHCR
+name: Build op-node from source and push to GHCR
 
 on:
   push:
-    branches:
-      - main
-    tags:
-      - 'v*'  # Also trigger on version tags
+    branches: [main]
 
 permissions:
   packages: write
   contents: read
 
 jobs:
-  docker:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout source code
+      - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Log in to GitHub Container Registry
+      - name: Log in to GHCR
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push Docker image
+      - name: Build and push op-node image
         uses: docker/build-push-action@v5
         with:
           context: .
