@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y make git
 WORKDIR /src
 RUN git clone https://github.com/ethereum-optimism/optimism.git
 WORKDIR /src/optimism/op-node
-RUN git checkout v1.2.0
+RUN git checkout op-node/1.13.2
 RUN make op-node
 
 # Stage 2: Create slim runtime image
