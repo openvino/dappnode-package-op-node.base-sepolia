@@ -13,13 +13,8 @@ services:
       - ./rollup.json:/data/rollup.json
       - opnode_data:/data
       - docker-base-sepolia_jwt_shared:/jwt:ro
-    environment:
-      - OP_NODE_L1_RPC=http://reth:8545
-      - OP_NODE_L2_RPC=http://localhost:9545
-      - OP_NODE_L1_BEACON=http://prysm:3500
-      - OP_NODE_L1_AUTH=http://reth:8551
-      - OP_NODE_JWT_SECRET=/jwt/jwt.hex
-      - OP_NODE_ROLLUP_CONFIG=/data/rollup.json
+    env_file:
+      - .env
     command:
       [
         "op-node",
