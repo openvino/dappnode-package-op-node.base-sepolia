@@ -26,6 +26,8 @@ RUN just op-node
 
 # Stage 2: Create slim runtime image
 FROM debian:bullseye-slim
+RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/lists/*
+
 COPY --from=builder /src/optimism/op-node/bin/op-node /usr/local/bin/op-node
 ENTRYPOINT ["op-node"]
 
